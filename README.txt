@@ -1,21 +1,21 @@
-SENG475 Summer 2022 Project
+#SENG475 Summer 2022 Project
 Random Maze Generator and Solver
 By: David Bishop
 Project Presentation: https://youtu.be/e3OVXGiJRIY
 
-Building and installing:
+##Building and installing:
 
 let $INSTALL_DIR denote the directory to install the executables.
 
 cmake -H. -Btmp_cmake -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
 cmake --build tmp_cmake --clean-first --target install
 
-Building test scripts:
+##Building test scripts:
 
 cmake -H. -Btmp_cmake -DENABLE_TEST=true
 cmake --build tmp_cmake
 
-Maze Generator Options:
+##Maze Generator Options:
 
 --seed s: Where s is the seed for the pseudo random number generator. This value must be >= 0. Default is seed with the current time.
 
@@ -27,17 +27,17 @@ Maze Generator Options:
 
 --output o: Where o is the path to the pnm file for the maze. Default is './out.pnm'.
 
-Maze Generator Example:
+##Maze Generator Example:
 
 $INSTALL_DIR/bin/maze_gen --width 100 --height 93 --algorithm wilson --output ./wilson.pnm --seed 1234
 
-Maze Solver Options:
+##Maze Solver Options:
 
 --input i: Where i is the path to the pnm file for the input maze. Default is './out.pnm'.
 
 --output o: Where o is the path to the pnm file for the solved maze. Default is './solved.pnm'.
 
-Maze Solver Example:
+##Maze Solver Example:
 
 $INSTALL_DIR/bin/maze_solve --input ./wilson.pnm --output ./wilson_solved.pnm
 
