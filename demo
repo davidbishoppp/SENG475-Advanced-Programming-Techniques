@@ -1,0 +1,75 @@
+#! /usr/bin/env bash
+
+panic() {
+    echo "ERROR: $@"
+    exit 1
+}
+
+cmd_dir=$(dirname "$0") || panic "cannot determine command directory"
+
+maze_gen_program="$cmd_dir/maze_gen"
+maze_solve_program="$cmd_dir/maze_solve"
+
+echo "SENG 475 Maze Generator and Solver Project Demo Script..."
+
+echo "This program generates a number of files, please enter the directory for them to be located: (default is ./demo_output)"
+
+read out_dir
+
+if [ ! ${out_dir} ]; then
+  out_dir="./demo_output";
+fi
+
+if [ ! -d ${out_dir} ]; then
+  mkdir -p ${out_dir};
+fi
+
+echo "Maze generator with DFS algorithm. Output will be dfs.pnm"
+echo "Running... ${maze_gen_program} --output ${out_dir}/dfs.pnm\n"
+
+$maze_gen_program --output ${out_dir}/dfs.pnm
+
+echo "Maze generator with Kruskal's algorithm and non-default height and width. Output will be kruskal.pnm"
+echo "Running... ${maze_gen_program} --output ${out_dir}/dfs.pnm"
+
+$maze_gen_program --height 55 --width 79 --algorithm kruskal --output ${out_dir}/kruskal.pnm
+
+echo "Maze generator with Prim's algorithm and contant seed of 1234. Output will be prim.pnm"
+echo "Running... ${maze_gen_program} --seed 1234 --algorithm prim --output ${out_dir}/prim.pnm"
+
+$maze_gen_program --seed 1234 --algorithm prim --output ${out_dir}/prim.pnm
+
+echo "Maze generator with Wilson's algorithm. Output will be wilson.pnm"
+echo "Running... ${maze_gen_program} --algorithm wilson --output ${out_dir}/wilson.pnm"
+
+$maze_gen_program --algorithm wilson --output ${out_dir}/wilson.pnm
+
+echo "Maze generator with Aldous's algorithm. Output will be aldous.pnm"
+echo "Running... ${maze_gen_program} --output ${out_dir}/aldous.pnm"
+
+$maze_gen_program --algorithm aldous --output ${out_dir}/aldous.pnm
+
+echo "Maze solver with DFS maze. Output will be dfs_solved.pnm"
+echo "Running... ${maze_gen_program} --input ${out_dir}/dfs.pnm --output ${out_dir}/dfs_solved.pnm"
+
+$maze_solve_program --input ${out_dir}/dfs.pnm --output ${out_dir}/dfs_solved.pnm
+
+echo "Maze solver with Kruskal's maze. Output will be kruskal_solved.pnm"
+echo "Running... ${maze_gen_program} --input ${out_dir}/kruskal.pnm --output ${out_dir}/kruskal_solved.pnm"
+
+$maze_solve_program --input ${out_dir}/kruskal.pnm --output ${out_dir}/kruskal_solved.pnm
+
+echo "Maze solver with Prim's maze. Output will be prim_solved.pnm"
+echo "Running... ${maze_gen_program} --input ${out_dir}/prim.pnm --output ${out_dir}/prim_solved.pnm"
+
+$maze_solve_program --input ${out_dir}/prim.pnm --output ${out_dir}/prim_solved.pnm
+
+echo "Maze solver with Wilson's maze. Output will be wilson_solved.pnm"
+echo "Running... ${maze_gen_program} --input ${out_dir}/wilson.pnm --output ${out_dir}/wilson_solved.pnm"
+
+$maze_solve_program --input ${out_dir}/wilson.pnm --output ${out_dir}/wilson_solved.pnm
+
+echo "Maze solver with Aldous's maze. Output will be aldous_solved.pnm"
+echo "Running... ${maze_gen_program} --input ${out_dir}/aldous.pnm --output ${out_dir}/aldous_solved.pnm"
+
+$maze_solve_program --input ${out_dir}/aldous.pnm --output ${out_dir}/aldous_solved.pnm
